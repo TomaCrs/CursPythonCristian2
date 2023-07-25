@@ -30,8 +30,9 @@
 # variabila_2='Sir 2'
 # print(variabila_1)
 # print(variabila_2)
-variabila_1 = 1
-variabila_2 = 2
-variabila_1 = 3
-variabila_3 = f"Ana are {variabila_1} mar si {variabila_2} pere"
-print(variabila_3)
+# variabila_1 = 1
+# variabila_2 = 2
+# # variabila_3 = "Ana are {} mar si {} pere".format(variabila_1, variabila_2)
+# # variabila_3 = "Ana are {0} mar si {1} pere".format(variabila_1, variabila_2)
+# variabila_3 = "\tAna are "+ str(variabila_1) + " mar si "+ str(variabila_2) + " pere"
+# print(variabila_3)
