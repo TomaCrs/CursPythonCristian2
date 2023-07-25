@@ -21,3 +21,17 @@
 # print(4>5 and 4<2)
 # print(4>5 or 4>2)
 # print(not(4>5))
+# print(1 in [1,2,3])
+# print(1 not in [1,2,3])
+# variabila_1= None
+# variabila_1= 1
+# print(variabila_1)
+# variabila_1="Sir \"1\""
+# variabila_2='Sir 2'
+# print(variabila_1)
+# print(variabila_2)
+variabila_1 = 1
+variabila_2 = 2
+variabila_1 = 3
+variabila_3 = f"Ana are {variabila_1} mar si {variabila_2} pere"
+print(variabila_3)
