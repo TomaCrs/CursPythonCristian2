@@ -1,1 +1,0 @@
-print("Salutare lume")
