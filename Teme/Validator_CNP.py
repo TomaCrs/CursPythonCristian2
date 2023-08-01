@@ -1,4 +1,4 @@
-cnp = list('5011210460011')
+cnp = list('5130321529615')
 cnp_validare = list()
 for i,x in enumerate(cnp):
     cnp_validare.append(int(x))
