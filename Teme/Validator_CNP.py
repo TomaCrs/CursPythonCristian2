@@ -1,4 +1,4 @@
-cnp = input(f"Introduceti CNP-ul :")                        #putem testa un cnp random valid 6150516456321 sau invalide 123, 61505afd56321 etc
+cnp = input(f"Introduceti CNP-ul :")                        #putem testa un cnp random valid 6150508456911 sau invalide 123, 61505afd56321 etc
 ok = True
 if len(cnp) != 13:                                          #verificam daca cnp-ul introdus are 13 caractere
     ok = False
@@ -12,10 +12,10 @@ if ok == True:
     luna_cnp = cnp[3]+cnp[4]
     if ok == True and not luna_cnp in luna:
         ok = False
+    # verificam ziua nasterii persoane
     if ok == True and cnp[5] == '0' and cnp[6] == '0':
             ok = False
-    #verificam ziua nasterii persoane
-    elif ok == True:
+    elif ok == True  and cnp[5] != '0':
         zi_cnp=cnp[5]+cnp[6]
         if luna_cnp in ['04', '06', '09', '11'] and zi_cnp == 31:
             ok = False
@@ -26,7 +26,7 @@ if ok == True:
     #verificam codul judetului unde s-a nascut persoana
     if ok == True and cnp[7] == '0' and cnp[8] == '0':
         ok = False
-    elif ok == True:
+    elif ok == True and cnp[7] != '0':
         judet_cnp = cnp[7] + cnp[8]
         if int(judet_cnp) not in range(10,47) and int(judet_cnp) != 51 and int(judet_cnp) != 52:
             ok = False
