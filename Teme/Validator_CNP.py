@@ -1,8 +1,7 @@
 cnp = input(f"Introduceti CNP-ul :")                        #putem testa un cnp random valid 6150508456911 sau invalide 123, 61505afd56321 etc
-ok = True
+ok = cnp.isdigit()                                          #verificam daca cnp-ul introdus este format doar din cifre
 if len(cnp) != 13:                                          #verificam daca cnp-ul introdus are 13 caractere
     ok = False
-ok = cnp.isdigit()                                          #verificam daca cnp-ul introdus este format doar din cifre
 if ok == True:
     #verificam sexul și secolul în care s-a născut persoana
     if not (cnp[0] >='1' and cnp[0] <= '9'):
