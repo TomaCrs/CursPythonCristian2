@@ -1,7 +1,6 @@
 pozitii = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 situatie_joc = [None, None, None, None, None, None, None, None, None]
 pozitii_calculator = [5, 1, 3, 7, 9, 2, 4, 6, 8]
-
 simbol_user = input("Alege optiune X sau 0 ").upper()
 
 
@@ -32,8 +31,10 @@ def check(lista, simbol):
         print(f"{simbol} a castigat")
         return True
     if None not in lista:
+        print("Nu a castigat nimeni!")
         return True
     return False
+
 
 def alegere_calculator(lista, simbol_pc, simbol_user):
     simboluri = list()
@@ -45,28 +46,28 @@ def alegere_calculator(lista, simbol_pc, simbol_user):
         else:
             simboluri.append(0)
     #decizie linii
-    for j in [3,6,9]:
+    for j in [3, 6, 9]:
         s = 0
-        for i in range(j-3,j):
+        for i in range(j-3, j):
             s += simboluri[i]
         if s == 2 or s == -2:
-            for i in range(j-3,j):
+            for i in range(j-3, j):
                 if simboluri[i] == 0:
                     return i
     #decizie coloana
     for j in range(3):
         s = 0
-        for i in [0,3,6]:
+        for i in [0, 3, 6]:
             s += simboluri[i+j]
         if s == 2 or s == -2:
-            for i in [0,3,6]:
+            for i in [0, 3, 6]:
                 if simboluri[i+j] == 0:
                     return i+j
     #decizie coloana principala
     s = 0
     s += simboluri[0]+simboluri[4]+simboluri[8]
-    if s == 2 or s ==-2:
-        for i in [0,4,8]:
+    if s == 2 or s == -2:
+        for i in [0, 4, 8]:
             if simboluri[i] == 0:
                 return i
     # decizie coloana secundara
@@ -78,62 +79,71 @@ def alegere_calculator(lista, simbol_pc, simbol_user):
                 return i
     #alegem din pozitii preferentiale
     i = pozitii_calculator[0]
-    pozitii_calculator.remove(i)
-    i -= 1
-    return i
-
+    return i-1
 
 
 while simbol_user != 'X' and simbol_user != '0':
-    simbol_user = input("Optiunea aleasa este gresita, Te rog alege X sau 0 ").upper
+    simbol_user = input("Optiunea aleasa este gresita, Te rog alege X sau 0 ").upper()
 
 simbol_calculator = "0" if simbol_user == "X" else "X"
-print(simbol_user + " " + simbol_calculator)
+#print(simbol_user + " " + simbol_calculator)
 
 # Jucatorul are X
 if simbol_user == 'X':
-    pozitia_aleasa = int(input(f"Alege pozitia {pozitii} "))
+    # pozitia_aleasa = int(input(f"Alege pozitia {pozitii} "))
     # plasam X pe pozitia aleasa de jucator daca este valida
     while not check(situatie_joc, simbol_user):
-        if pozitia_aleasa in pozitii:
-            situatie_joc[pozitia_aleasa - 1] = simbol_user
-            pozitii.remove(pozitia_aleasa)
-            pozitii_calculator.remove(pozitia_aleasa)
-            afisare(situatie_joc)
-            if check(situatie_joc, simbol_user):
-                break
-            # plasam pozitia calculatorului
-            else:
-                optiune_calculator = alegere_calculator(situatie_joc, simbol_calculator, simbol_user)
-                situatie_joc[optiune_calculator] = simbol_calculator
-                pozitii.remove(optiune_calculator+1)
-                afisare(situatie_joc)
-                if check(situatie_joc, simbol_calculator):
-                    break
-        # introduce jucatorul
-        else:
-            pozitia_aleasa = int(input(f"pozitie ocupata, alege alta {pozitii} "))
-            continue
+        pozitia_aleasa = input(f"Alege pozitia {pozitii} ")
+        while not pozitia_aleasa.isnumeric() or int(pozitia_aleasa) not in range(1,10):
+            pozitia_aleasa = input(f"Optiune Incorecta, Te rog alege una din variantele: {pozitii} ")
+        pozitia_aleasa = int(pozitia_aleasa)
+        while pozitia_aleasa not in pozitii:
+            pozitia_aleasa = input(f"Pozitie ocupata, alege alta {pozitii} ")
+            while not pozitia_aleasa.isnumeric() or int(pozitia_aleasa) not in range(1, 10):
+                pozitia_aleasa = input(f"Optiune Incorecta, Te rog alege una din variantele: {pozitii} ")
+            pozitia_aleasa = int(pozitia_aleasa)
+        situatie_joc[pozitia_aleasa - 1] = simbol_user
+        pozitii.remove(pozitia_aleasa)
+        pozitii_calculator.remove(pozitia_aleasa)
+        afisare(situatie_joc)
+        if check(situatie_joc, simbol_user):
+            break
+        # plasam pozitia calculatorului
+
+        optiune_calculator = alegere_calculator(situatie_joc, simbol_calculator, simbol_user)
+        pozitii_calculator.remove(optiune_calculator + 1)
+        pozitii.remove(optiune_calculator + 1)
+        situatie_joc[optiune_calculator] = simbol_calculator
+
+        afisare(situatie_joc)
+        if check(situatie_joc, simbol_calculator):
+            break
 # Jucatorul are 0
 else:
     # plasam pozitia calculatorului
     while not check(situatie_joc, simbol_calculator):
         optiune_calculator = alegere_calculator(situatie_joc, simbol_calculator, simbol_user)
         situatie_joc[optiune_calculator] = simbol_calculator
+
         pozitii.remove(optiune_calculator + 1)
+        pozitii_calculator.remove(optiune_calculator + 1)
+
         afisare(situatie_joc)
         if check(situatie_joc, simbol_calculator):
             break
         # plasam 0 pe pozitia aleasa de jucator daca este valida
-        pozitia_aleasa = int(input(f"Alege pozitia {pozitii} "))
-        if pozitia_aleasa in pozitii:
-            situatie_joc[pozitia_aleasa - 1] = simbol_user
-            pozitii.remove(pozitia_aleasa)
-            pozitii_calculator.remove(pozitia_aleasa)
-            afisare(situatie_joc)
-            if check(situatie_joc, simbol_user):
-                break
-        else:
-            pozitia_aleasa = int(input(f"pozitie ocupata, alege alta {pozitii} "))
-            continue
+        pozitia_aleasa = input(f"Alege pozitia {pozitii} ")
+        while not pozitia_aleasa.isnumeric() or int(pozitia_aleasa) not in range(1, 10):
+            pozitia_aleasa = input(f"Optiune Incorecta, Te rog alege una din variantele: {pozitii} ")
+        pozitia_aleasa = int(pozitia_aleasa)
+        while pozitia_aleasa not in pozitii:
+            pozitia_aleasa = input(f"Pozitie ocupata, alege alta {pozitii} ")
+            while not pozitia_aleasa.isnumeric() or int(pozitia_aleasa) not in range(1, 10):
+                pozitia_aleasa = input(f"Optiune Incorecta, Te rog alege una din variantele: {pozitii} ")
+            pozitia_aleasa = int(pozitia_aleasa)
+        situatie_joc[pozitia_aleasa - 1] = simbol_user
+        pozitii.remove(pozitia_aleasa)
+        pozitii_calculator.remove(pozitia_aleasa)
         afisare(situatie_joc)
+        if check(situatie_joc, simbol_user):
+            break
