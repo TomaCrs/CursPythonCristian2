@@ -1,3 +1,5 @@
+import random
+
 situatie_joc = [None, None, None, None, None, None, None, None, None]
 pozitii_calculator = [5, 1, 3, 7, 9, 2, 4, 6, 8]
 
@@ -30,61 +32,70 @@ def check(lista, simbol, name):
     return False
 
 
-def suma_partiala(lista, simbol_pc, simbol_user):
+# returneaza o lista pt fiecare pozitie: 1 pt pc, 0 pt none si -1 pt user
+def suma_partiala(lista, simbol_pc, simbol_usr):
     simboluri = list()
     for i in range(9):
         if lista[i] == simbol_pc:
             simboluri.append(1)
-        elif lista[i] == simbol_user:
+        elif lista[i] == simbol_usr:
             simboluri.append(-1)
         else:
             simboluri.append(0)
     return simboluri
 
-def alegere_partiala(lista, simbol_pc, simbol_user, valoare):
-    simboluri = suma_partiala(lista, simbol_pc, simbol_user)
-    #decizie linii
+
+# verifica situatia jocului in cazul in care ar fi 2 elemente pe fiecare linie, coloana, diagonala si o pozitie libera
+def alegere_partiala(lista, valoare):
+    # decizie linii
     for j in [3, 6, 9]:
         s = 0
-        for i in range(j-3, j):
-            s += simboluri[i]
+        for i in range(j - 3, j):
+            s += lista[i]
         if s == valoare:
-            for i in range(j-3, j):
-                if simboluri[i] == 0:
+            for i in range(j - 3, j):
+                if lista[i] == 0:
                     return i
-    #decizie coloana
+    # decizie coloana
     for j in range(3):
         s = 0
         for i in [0, 3, 6]:
-            s += simboluri[i+j]
+            s += lista[i + j]
         if s == valoare:
             for i in [0, 3, 6]:
-                if simboluri[i+j] == 0:
-                    return i+j
-    #decizie coloana principala
+                if lista[i + j] == 0:
+                    return i + j
+    # decizie diagonala principala
     s = 0
-    s += simboluri[0]+simboluri[4]+simboluri[8]
+    s += lista[0] + lista[4] + lista[8]
     if s == valoare:
         for i in [0, 4, 8]:
-            if simboluri[i] == 0:
+            if lista[i] == 0:
                 return i
-    # decizie coloana secundara
+    # decizie diagonala secundara
     s = 0
-    s += simboluri[2] + simboluri[4] + simboluri[6]
+    s += lista[2] + lista[4] + lista[6]
     if s == valoare:
         for i in [2, 4, 6]:
-            if simboluri[i] == 0:
+            if lista[i] == 0:
                 return i
 
-def alegere_calculator(lista, pozitii_pc, simbol_pc, simbol_user):
-    i = alegere_partiala(lista,simbol_pc, simbol_user, 2)
-    if i != None:
+
+def alegere_calculator(lista, pozitii_pc, simbol_pc, simbol_usr):
+    simboluri = suma_partiala(lista, simbol_pc, simbol_usr)
+    # verifica daca exista posibilitatea ca pc sa castige la urmatoarea mutare
+    i = alegere_partiala(simboluri, 2)
+    if i is not None:
         return i
-    i = alegere_partiala(lista, simbol_pc, simbol_user, -2)
-    if i != None:
+    # verifica daca exista posibilitatea ca userul sa castige la urmatoarea mutare
+    i = alegere_partiala(simboluri, -2)
+    if i is not None:
         return i
-    # alegem din pozitii preferentiale
-    i = pozitii_pc[0]
+    # alegem din pozitii preferentiale sau random daca e prima alegere a calculatorului
+    if len(pozitii_pc) > 7:
+        i = pozitii_pc[random.randrange(len(pozitii_pc))]
+    else:
+        i = pozitii_pc[0]
     return i - 1
 
 
@@ -114,7 +125,7 @@ while not check(situatie_joc, simbol_user, "Jucatorul"):
         alegere_user(pozitii_calculator, situatie_joc, simbol_user)
         afisare(situatie_joc)
 
-    optiune_calculator = alegere_calculator(situatie_joc,  pozitii_calculator, simbol_calculator, simbol_user)
+    optiune_calculator = alegere_calculator(situatie_joc, pozitii_calculator, simbol_calculator, simbol_user)
     situatie_joc[optiune_calculator] = simbol_calculator
     pozitii_calculator.remove(optiune_calculator + 1)
     afisare(situatie_joc)
