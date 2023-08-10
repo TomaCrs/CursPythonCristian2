@@ -116,6 +116,7 @@ simbol_user = input("Alege optiune X sau 0 ").upper()
 # verificam daca inputul de la jucator este corect
 while simbol_user != 'X' and simbol_user != '0':
     simbol_user = input("Optiunea aleasa este gresita, Te rog alege X sau 0 ").upper()
+
 simbol_calculator = "0" if simbol_user == "X" else "X"
 
 # plasam pozitia calculatorului
