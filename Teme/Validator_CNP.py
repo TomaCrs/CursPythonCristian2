@@ -12,14 +12,25 @@ if ok:
     luna_cnp = cnp[3] + cnp[4]
     if ok is True and luna_cnp not in luna:
         ok = False
+    #construim anul
+    an =''
+    if cnp[0] in ['1','2','7','8','9']:
+        an = '19' + cnp[1:3]
+    elif cnp[0] in ['3','4']:
+        an = '18' + cnp[1:3]
+    else: an = '20' + cnp[1:3]
+    an=int(an)
     # verificam ziua nasterii persoane
     if ok is True and cnp[5] == '0' and cnp[6] == '0':
         ok = False
     elif ok is True and cnp[5] != '0':
         zi_cnp = cnp[5] + cnp[6]
+        zi_cnp = int(zi_cnp)
         if luna_cnp in ['04', '06', '09', '11'] and zi_cnp == 31:
             ok = False
         if luna_cnp == '02' and (zi_cnp == 31 or zi_cnp == 30):
+            ok = False
+        elif luna_cnp == '02' and not (an % 400 == 0 or (an % 4 == 0 and an % 100 != 0)) and zi_cnp == 29:
             ok = False
         if int(zi_cnp) not in range(10, 31):
             ok = False
@@ -28,7 +39,8 @@ if ok:
         ok = False
     elif ok is True and cnp[7] != '0':
         judet_cnp = cnp[7] + cnp[8]
-        if int(judet_cnp) not in range(10, 47) and int(judet_cnp) != 51 and int(judet_cnp) != 52:
+        judet_cnp = int(judet_cnp)
+        if judet_cnp not in range(10, 47) and judet_cnp != 51 and judet_cnp != 52:
             ok = False
     # verificam numarul unic
     nnn = cnp[9] + cnp[10] + cnp[11]
