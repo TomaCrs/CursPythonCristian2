@@ -12,14 +12,15 @@ if ok:
     luna_cnp = cnp[3] + cnp[4]
     if ok is True and luna_cnp not in luna:
         ok = False
-    #construim anul
-    an =''
-    if cnp[0] in ['1','2','7','8','9']:
+    # construim anul
+    an = ''
+    if cnp[0] in ['1', '2', '7', '8', '9']:
         an = '19' + cnp[1:3]
-    elif cnp[0] in ['3','4']:
+    elif cnp[0] in ['3', '4']:
         an = '18' + cnp[1:3]
-    else: an = '20' + cnp[1:3]
-    an=int(an)
+    else:
+        an = '20' + cnp[1:3]
+    an = int(an)
     # verificam ziua nasterii persoane
     if ok is True and cnp[5] == '0' and cnp[6] == '0':
         ok = False

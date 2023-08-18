@@ -8,4 +8,5 @@ elif nr % 3 == 0:
     print('Fizz')
 elif nr % 5 == 0:
     print('Buzz')
-else: print(nr)
+else:
+    print(nr)
