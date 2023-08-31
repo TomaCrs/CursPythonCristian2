@@ -2,17 +2,24 @@
 # lista_start = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
 # n = 3
 # result = [['a', 'd', 'g', 'j', 'm'], ['b', 'e', 'h', 'k', 'n'], ['c', 'f', 'i', 'l']]
+# lista_start = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+list_init = input("Elementele listei sunt separate prin virgula: ")
+lista_start = list_init.split(',')
 
-def functie_split(input_list, n):
+n = input("Introduceti un nr intreg si pozitiv: ")
+while n.isnumeric() is False:
+    n = input("Introduceti un nr intreg si pozitiv: ")
+n = int(n)
+
+
+def functie_split(input_list: list, nr: int) ->list:
     result = []
-    for i in range(n):
+    for i in range(nr):
         result.append([])
     for i, x in enumerate(input_list):
-        result_index = i % n
+        result_index = i % nr
         result[result_index].append(x)
     return result
 
-lista_start = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
-n = 3
-result = functie_split(lista_start, n)
-print(result)
+
+print(functie_split(lista_start, n))
