@@ -9,3 +9,4 @@ dictionar.update({"cheia11": "valoare", "cheia12": 12})
 # dictionar.popitem()
 dictionar['cheia11'] = 'alfabet'
 print(dictionar)
+print(dictionar['cheia11'])
