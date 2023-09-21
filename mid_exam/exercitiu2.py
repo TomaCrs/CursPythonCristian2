@@ -1,4 +1,4 @@
-def element_majoritar(x: list) -> list:
+def element_majoritar(x: list) -> str:
     elemente = []
     aparitie_maxima = 0
     for value in x:
