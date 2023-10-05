@@ -16,5 +16,20 @@ taskuri = {
 var = pandas.DataFrame(taskuri, index=['id01', 'id02', 'id03'])
 # print(var)
 
-df = pandas.read_csv("pandas_excel.csv")
-print(df)
+df = pandas.read_csv("date_test.csv")
+df.fillna(0, inplace=True)
+# dict_to_replace = {": ": 0, ":": 0}
+# df.replace(dict_to_replace, inplace=True)
+# print(df)
+# import matplotlib.pyplot as plot
+# df['AT'].plot(kind='hist')
+# df.plot(kind='scatter', x='AT', y='BE')
+# plot.show()
+# print(df.head(2))
+# print(df.tail(2))
+# df.loc[2, 'AL'] = 45
+# print(df)
+# print(df.transpose())
+# print(df.AL.tolist())
+for item,row in df.iterrows():
+    print(row)
