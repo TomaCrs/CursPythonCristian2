@@ -18,5 +18,6 @@ dictionar = {i: [] for i in header}
 for j in range(0, len(header)):
     for i in range(len(header) + int(j), len(lista), len(header)):
         dictionar[header[int(j)]].append(lista[i])
+print(dictionar)
 df = pandas.DataFrame(dictionar)
 df.to_csv('bnr_all_data.csv')
