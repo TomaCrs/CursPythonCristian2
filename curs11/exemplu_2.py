@@ -29,6 +29,7 @@ class Pisica:
     nr_picioare = 4
     nr_pisici = 0
     nr_vieti = 9
+
     def __init__(self, size='mare'):
         # self.__marime = size
         self.marime = size
