@@ -36,7 +36,7 @@ class Extensie1(Catalog):
             for x in nt:
                 if type(x) is int:
                     medie += x
-            medii[mt] = round(medie / len(nt),2)
+            medii[mt] = round(medie / len(nt), 2)
         return medii
 
 
@@ -53,10 +53,10 @@ student2.incrementare_abs()
 student2.stergere_abs(2)
 print(student1)
 print(student2)
-student1.adaugare_materie("Python", [10,7,9])
-student2.adaugare_materie("Python", [8,5,9])
-student2.adaugare_materie("Matematica", [10,9,9])
-student1.adaugare_materie("Romana", [6,9,9])
+student1.adaugare_materie("Python", [10, 7, 9])
+student2.adaugare_materie("Python", [8, 5, 9])
+student2.adaugare_materie("Matematica", [10, 9, 9])
+student1.adaugare_materie("Romana", [6, 9, 9])
 print(student1.afisare_materii())
 print(student2.afisare_materii())
 print(student1.situatie_scolare())
