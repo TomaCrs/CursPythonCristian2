@@ -17,8 +17,23 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ item.city }}</td>
                 <td>{{ item.country }}</td>
-                <td>{{ item.active }}</td>
-                <td></td>
+                <td>
+                    {% if item.active is True %}
+                        Activ
+                    {% else %}
+                        Dezactivat
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="btn btn-success" href="{% url 'aplicatie1:modifica' item.id %}">Editare</a>
+                    {% if item.active is True %}
+                        <a class="btn btn-info" href="{% url 'aplicatie1:dezactiveaza' item.id %}">Dezactiveaza</a>
+                    {% endif %}
+                    {% if item.active is False %}
+                        <a class="btn btn-info" href="{% url 'aplicatie1:activeaza' item.id %}">Activeaza</a>
+                    {% endif %}
+                    <a class="btn btn-danger" href="{% url 'aplicatie1:stergere' item.id %}">Sterge!</a>
+                </td>
             </tr>
         {% endfor %}
     </tbody>

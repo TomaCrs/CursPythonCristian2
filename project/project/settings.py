@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'aplicatie1',
     'aplicatie2',
+    'pontaj',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'project.context_processors.is_ready_to_work',
             ],
         },
     },
@@ -122,6 +124,7 @@ STATIC_URL = 'static/'
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/location/'
+LOGOUT_REDIRECT_URL ='/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-fields
 
