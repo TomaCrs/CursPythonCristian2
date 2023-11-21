@@ -13,16 +13,16 @@ class CompaniesView(LoginRequiredMixin, ListView):
 
 class CreateCompaniesView(LoginRequiredMixin, CreateView):
     model = Companies
-    fields = ['name', 'company_type', 'location']
-    template_name = 'forms2.html'
+    fields = ['name', 'company_type', 'location', 'website']
+    template_name = 'forms.html'
     def get_success_url(self):
         return reverse('aplicatie2:lista_companii')
 
 
 class UpdateCompaniesView(LoginRequiredMixin, UpdateView):
     model = Companies
-    fields = ['name', 'company_type', 'location']
-    template_name = 'forms2.html'
+    fields = ['name', 'company_type', 'location', 'website']
+    template_name = 'forms.html'
 
     def get_success_url(self):
         return reverse('aplicatie2:lista_companii')
