@@ -12,6 +12,11 @@ class RetetaView(ListView):
     template_name = 'ap1/reteta_index.html'
     paginate_by = 5
 
+class IstoricView(ListView):
+    model = Reteta
+    template_name = 'ap1/istoric_index.html'
+    paginate_by = 10
+
 
 class CreateRetetaView(LoginRequiredMixin,CreateView):
     model = Reteta
